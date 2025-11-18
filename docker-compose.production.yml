@@ -25,13 +25,13 @@ services:
     depends_on:
       - db
   frontend:
-    image: never52/frontend:latest
+    image: never52/kittygram_frontend:latest
     command: cp -r /app/build/. /frontend_static/
     env_file: .env.example
     volumes:
       - static:/frontend_static
   gateway:
-    image: never52/gateway:latest
+    image: never52/kittygram_gateway:latest
     env_file: .env.example
     volumes:
       - static:/staticfiles
