@@ -9,6 +9,7 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    
     services:
       postgres:
         image: postgres:13.10
@@ -18,7 +19,6 @@ jobs:
           POSTGRES_USER: django_user
           POSTGRES_PASSWORD: django_password
           POSTGRES_DB: django_db
-          SECRET_KEY: ${{ secrets.SECRET_KEY}}
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -37,6 +37,8 @@ jobs:
     # Этот шаг дополним:
     - name: Test with flake8 and django tests
       env:
+        # Переменная, которую вы добавили в Secrets репозитория (Settings → Secrets and variables → Actions)
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
         POSTGRES_USER: django_user
         POSTGRES_PASSWORD: django_password
         POSTGRES_DB: django_db
