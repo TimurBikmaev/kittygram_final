@@ -11,13 +11,6 @@ services:
       - pg_data:/var/lib/postgresql/data
   backend:
     image: never52/kittygram_backend:latest
-    command: >
-      sh -c "
-      python manage.py collectstatic --noinput &&
-      cp -r /app/collected_static/. /backend_static/static/ &&
-      python manage.py migrate &&
-      gunicorn kittygram_backend.wsgi:application --bind 0.0.0.0:8000
-      "
     env_file: .env.example
     volumes:
       - static:/backend_static
