@@ -10,8 +10,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: never52/backend:latest
-    build: ./backend/
+    image: kittygram_backend:latest
     command: >
       sh -c "
       python manage.py collectstatic --noinput &&
@@ -27,14 +26,12 @@ services:
       - db
   frontend:
     image: never52/frontend:latest
-    build: ./frontend/
     command: cp -r /app/build/. /frontend_static/
     env_file: .env.example
     volumes:
       - static:/frontend_static
   gateway:
     image: never52/gateway:latest
-    build: ./nginx/
     env_file: .env.example
     volumes:
       - static:/staticfiles
