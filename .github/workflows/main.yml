@@ -14,14 +14,14 @@ jobs:
         image: postgres:13.10
         # Указываем имя тестовой базы, имя и пароль пользователя в открытом виде,
         # ведь эта база будет работать только во время прогона тестов    
-      env: 
-        POSTGRES_USER: django_user
-        POSTGRES_PASSWORD: django_password
-        POSTGRES_DB: django_db
-        SECRET_KEY: ${{ secrets.SECRET_KEY}}
-      ports:
-        - 5432:5432
-      options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        env: 
+          POSTGRES_USER: django_user
+          POSTGRES_PASSWORD: django_password
+          POSTGRES_DB: django_db
+          SECRET_KEY: ${{ secrets.SECRET_KEY}}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -29,7 +29,6 @@ jobs:
       with:
         python-version: 3.12
 
-    # Чтобы запустить тесты, нужно установить зависимости
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
