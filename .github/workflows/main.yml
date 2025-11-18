@@ -62,7 +62,7 @@ jobs:
         with:
           context: ./backend/
           push: true
-          tags: never52/backend:latest
+          tags: kittygram_backend:latest
 
   frontend_tests:
     runs-on: ubuntu-latest
