@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY') 
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG') == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'yakittygram.servemp3.com']
+ALLOWED_HOSTS = list(os.getenv('ALLOWED_HOSTS'))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
